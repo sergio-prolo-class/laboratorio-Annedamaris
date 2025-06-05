@@ -12,9 +12,10 @@ int main()
         case '+':
             res = x + y;
             break;
-        case '-' res = x - y;
+        case '-':
+            res = x - y;
             break;
-            case '*':
+        case '*':
             res = x * y;
             break;
         case '/':
