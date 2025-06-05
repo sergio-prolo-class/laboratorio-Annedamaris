@@ -6,16 +6,15 @@ int main()
     char op;
 
     printf("Entre com a expressão: ");
-    scanf("%f %c %f", &x, &op, &res);
+    scanf("%f %c %f", &x, &op, &y);
 
     switch (op) {
         case '+':
             res = x + y;
             break;
-        case '-':
-            res = x - y;
+        case '-' res = x - y;
             break;
-        case '*':
+            case '*':
             res = x * y;
             break;
         case '/':
@@ -26,6 +25,8 @@ int main()
             res = x / y;
             break;
         default:
+            printf("Operador inválido\n");
+            return 1;
     }
 
     printf("O número é %.2f\n", res);
