@@ -3,7 +3,6 @@
         "clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling"
     ],
     "files.associations": {
-        "caixas.C": "cpp",
         "PROJETO_FINAL.C": "cpp"
     }
 }
