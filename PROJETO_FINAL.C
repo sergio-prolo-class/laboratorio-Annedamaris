@@ -3,6 +3,7 @@
 
 #define MAX 5
 
+////// nova estrutura com separação de quantidades para bebidas e pizza.
 typedef struct {
     int id;
     char cliente[10];
@@ -13,13 +14,14 @@ typedef struct {
     float total;
 } Pedido;
 
-void menu();
-void novo(Pedido pedidos[], int *qtd, float *caixa);
-void listar(Pedido pedidos[], int qtd);
-void totalCaixa(float caixa);
+void menu(); ///// declara o menu
+void novo(Pedido pedidos[], int *qtd, float *caixa); //// cadastra novo pedido
+void listar(Pedido pedidos[], int qtd);  ////lista os pedidos
+void totalCaixa(float caixa); ////mostra o total do caixa
 
 int main()
 {
+    ///// inicia com o Menu
     Pedido pedidos[MAX];
     int qtd = 0;
     float caixa = 0;
@@ -29,7 +31,7 @@ int main()
         menu();
         printf("Opcao: ");
         scanf("%d", &opcao);
-        getchar(); // limpa o \n
+        getchar(); 
 
         switch (opcao) {
             case 1:
@@ -42,7 +44,7 @@ int main()
                 totalCaixa(caixa);
                 break;
             case 4: {
-    int subopcao;
+    int subopcao; ///direciona para o relatorio
     printf("\n--- RELATÓRIO ---\n");
     printf("1 - Salvar (acrescentar) todos os pedidos\n");
     printf("2 - Atualizar (sobrescrever) relatório\n");
@@ -51,7 +53,7 @@ int main()
     getchar();
 
     if (subopcao == 1) {
-        FILE *arquivo = fopen("relatorio.txt", "a");
+        FILE *arquivo = fopen("relatorio.txt", "a"); ///"a"	append (acrescentar) conteúdo antigo é mantido e novos dados são adicionados no fim
         if (arquivo != NULL) {
             for (int i = 0; i < qtd; i++) {
                 fprintf(arquivo, "ID: %d | Cliente: %s | Sabor: %s | Qtde Pizza: %d | Bebida: %s | Qtde Bebida: %d | Total: R$ %.2f\n",
@@ -69,7 +71,7 @@ int main()
             printf("Erro ao abrir o arquivo!\n");
         }
     } else if (subopcao == 2) {
-        FILE *arquivo = fopen("relatorio.txt", "w");
+        FILE *arquivo = fopen("relatorio.txt", "w"); ///"w"	write, abre para escrita, cria o arquivo se não existir. Se existir, apaga o conteúdo (não consegui melhorar daqui para frente, pois com essa opção, está apagando tudo que já estava escrito).
         if (arquivo != NULL) {
             for (int i = 0; i < qtd; i++) {
                 fprintf(arquivo, "ID: %d | Cliente: %s | Sabor: %s | Qtde Pizza: %d | Bebida: %s | Qtde Bebida: %d | Total: R$ %.2f\n",
@@ -102,9 +104,11 @@ int main()
     return 0;
 }
 
-void menu()
+void menu() ////Menu interativo
 {
-    printf("\n--- MENU ---\n");
+    printf("\n***** Pizzaria La Nonna Felice ^.^  ******\n");
+    printf("\n === Iniciando Gerenciador de Pizzaria ===\n");
+    printf("\n--- Escolha uma das opções abaixo ---\n");
     printf("1 - Anotar novo pedido\n");
     printf("2 - Listar pedidos\n");
     printf("3 - Mostrar total em caixa\n");
@@ -123,21 +127,27 @@ void novo(Pedido pedidos[], int *qtd, float *caixa)
     fgets(pedidos[*qtd].cliente, 10, stdin);
     strtok(pedidos[*qtd].cliente, "\n");
 
-    int sabor;
+    
     float precoPizza = 0;
+    char linha[20];   
+
+    int sabor; //// opções de sabores
+
+    do {
     printf("\n Sabores:\n");
     printf("1 - Queijo (39.90)\n");
     printf("2 - Bacon (45.90)\n");
     printf("3 - Calabresa (45.90)\n");
     printf("Escolha: ");
-    scanf("%d", &sabor);
-    getchar();
 
-    if (sabor < 1 || sabor > 3) {
-        printf("Opção inválida! Digite novamente.\n");
+    fgets(linha, sizeof(linha), stdin); //// correção para valores diferentes das opções do Menu.
+
+    if (sscanf(linha, "%d", &sabor) != 1 || sabor < 1 || sabor > 3) {
+        printf("Opção inválida! Digite um número entre 1 e 3.\n");
+        sabor = -1; // garante que o loop continue, e não aceite valores diferentes das opções do Menu.
     }
-    while (sabor < 1 || sabor > 3);
-
+} while (sabor < 1 || sabor > 3);
+    
     switch (sabor) {
         case 1:
             strcpy(pedidos[*qtd].sabor, "Queijo");
@@ -155,12 +165,13 @@ void novo(Pedido pedidos[], int *qtd, float *caixa)
         }
 
     do {
-        printf("Quantidade de pizzas: ");
+        printf("Quantidade de pizzas: "); //// nova função, quantidade de Pizza.
         scanf("%d", &pedidos[*qtd].qtdPizza);
         getchar();
         if (pedidos[*qtd].qtdPizza < 0) printf("Valor inválido! Digite novamente.\n");
     } while (pedidos[*qtd].qtdPizza < 0);
 
+    //// nova função, opção de aceitar bebida ou não.
     int opcaoBebida, bebida;
     float precoBebida = 0;
     pedidos[*qtd].qtdBebida = 0;
@@ -202,7 +213,7 @@ void novo(Pedido pedidos[], int *qtd, float *caixa)
         } while (pedidos[*qtd].qtdBebida < 0);
     }
 
-    // Calcula total do pedido
+    ////// nova função, calculo do total do pedido.
     float totalPedido = precoPizza * pedidos[*qtd].qtdPizza + precoBebida * pedidos[*qtd].qtdBebida;
     pedidos[*qtd].total = totalPedido;
     pedidos[*qtd].id = *qtd + 1;
@@ -210,7 +221,7 @@ void novo(Pedido pedidos[], int *qtd, float *caixa)
 
     printf("Total do pedido: R$ %.2f\n", totalPedido);
 
-    // Troco
+    ////// nova função, calculo do troco.
     char resposta;
     printf("Deseja calcular o troco? (s/n): ");
     scanf(" %c", &resposta);
@@ -227,7 +238,7 @@ void novo(Pedido pedidos[], int *qtd, float *caixa)
     }
     
 
-    // Salvar no relatório
+    ////// nova função, salvar no relatório
     FILE *arquivo = fopen("relatorio.txt", "a");
     if (arquivo != NULL) {
         fprintf(arquivo, "ID: %d | Cliente: %s | Sabor: %s | Qtde Pizza: %d | Bebida: %s | Qtde Bebida: %d | Total: R$ %.2f\n",

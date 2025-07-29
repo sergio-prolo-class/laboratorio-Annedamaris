@@ -1,10 +1,1 @@
-ID: 1 | Cliente: aa | Sabor: Queijo | Qtde Pizza: 1 | Bebida: Agua | Qtde Bebida: 1 | Total: R$ 44.90
-ID: 2 | Cliente: Anne | Sabor: Bacon | Qtde Pizza: 2 | Bebida: Refri | Qtde Bebida: 2 | Total: R$ 111.80
-ID: 1 | Cliente: aa | Sabor: Queijo | Qtde Pizza: 1 | Bebida: Agua | Qtde Bebida: 1 | Total: R$ 44.90
-ID: 2 | Cliente: Anne | Sabor: Bacon | Qtde Pizza: 2 | Bebida: Refri | Qtde Bebida: 2 | Total: R$ 111.80
-ID: 3 | Cliente: Anne | Sabor: Queijo | Qtde Pizza: 1 | Bebida: Refri | Qtde Bebida: 2 | Total: R$ 59.90
-ID: 1 | Cliente: Anne | Sabor: Bacon | Qtde Pizza: 2 | Bebida: Nenhuma | Qtde Bebida: 0 | Total: R$ 91.80
-ID: 2 | Cliente: Anne | Sabor: Bacon | Qtde Pizza: 1 | Bebida: Nenhuma | Qtde Bebida: 0 | Total: R$ 45.90
-ID: 3 | Cliente: Anne | Sabor: Calabresa | Qtde Pizza: 4 | Bebida: Nenhuma | Qtde Bebida: 0 | Total: R$ 183.60
-ID: 4 | Cliente: Anne | Sabor: Calabresa | Qtde Pizza: 1 | Bebida: Nenhuma | Qtde Bebida: 0 | Total: R$ 45.90
-ID: 1 | Cliente: Anne | Sabor: Calabresa | Qtde Pizza: 1 | Bebida: Agua | Qtde Bebida: 1 | Total: R$ 50.90
+ID: 1 | Cliente: 1 | Sabor: Queijo | Qtde Pizza: 1 | Bebida: Nenhuma | Qtde Bebida: 0 | Total: R$ 39.90
